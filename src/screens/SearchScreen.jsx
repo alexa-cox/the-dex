@@ -1,7 +1,8 @@
 import React from 'react';
+import { Text } from 'react-native';
 
 const SearchScreen = () => {
-  return <div>SearchScreen</div>;
+  return <Text>SearchScreen</Text>;
 };
 
 export default SearchScreen;
