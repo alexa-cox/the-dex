@@ -20,7 +20,7 @@ const Tab = createBottomTabNavigator();
 //bottom tabs for home, search, favorites
 
 const BottomTabNavigator = () => (
-  <Tab.Navigator>
+  <Tab.Navigator initialRouteName='Home'>
     <Tab.Screen
       name='Search'
       component={SearchScreen}

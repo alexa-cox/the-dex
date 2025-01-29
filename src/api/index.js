@@ -1,3 +1,3 @@
-import { fetchPokemon } from './pokemonApi';
+import { fetchPokemon, fetchPokemonList } from './pokemonApi';
 
-export { fetchPokemon };
+export { fetchPokemon, fetchPokemonList };

@@ -1,5 +1,7 @@
+// Imports
+import { getPokemon, getPokemonList, pokemonReducer } from './pokemonSlice';
 import store from './store';
-import {} from './pokemonSlice';
-import {} from './favoriteSlice';
 
-export { store };
+// Exports
+export default store;
+export { getPokemon, getPokemonList, pokemonReducer };
