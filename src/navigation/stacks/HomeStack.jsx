@@ -8,11 +8,11 @@ const HomeStack = () => {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
       <Stack.Screen
-        name='HomeScreen'
+        name='Home'
         component={HomeScreen}
       />
       <Stack.Screen
-        name='PokemonDetails'
+        name='Pokemon'
         component={PokemonDetailsScreen}
       />
     </Stack.Navigator>

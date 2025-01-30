@@ -19,7 +19,7 @@ const AppNavigator = () => {
           })}
         >
           <Drawer.Screen
-            name='Home'
+            name='HomeScreen'
             component={TabNavigator}
           />
           <Drawer.Screen

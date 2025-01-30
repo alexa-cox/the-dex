@@ -5,14 +5,11 @@ import {
   CACHE_EXPIRATION_HOURS,
   POKEMON_PER_PAGE,
 } from './apiConfig';
+import { cleanupOldCache } from '../utils/clearStorage';
 
 export const fetchPokemonList = async (page = 0) => {
   try {
     const offset = page * POKEMON_PER_PAGE;
-    console.log(
-      'Fetching from API:',
-      `${BASE_API_URL}pokemon?limit=${POKEMON_PER_PAGE}&offset=${offset}`
-    );
     const cacheKey = `pokemon_list_${page}`;
 
     //check cache
@@ -30,15 +27,36 @@ export const fetchPokemonList = async (page = 0) => {
       `${BASE_API_URL}pokemon?limit=${POKEMON_PER_PAGE}&offset=${offset}`
     );
 
+    // detailed data
+    const detailedPokemonPromises = response.data.results.map((pokemon) =>
+      axios.get(pokemon.url)
+    );
+    const detailedResponses = await Promise.all(detailedPokemonPromises);
+
+    //combine the data
+    const enhancedData = {
+      ...response.data,
+      results: detailedResponses.map((res) => ({
+        id: res.data.id,
+        name: res.data.name,
+        types: res.data.types,
+        sprites: {
+          front_default: res.data.sprites.front_default,
+        },
+      })),
+    };
+
+    // clean cache
+    await cleanupOldCache();
+
     //cache the results
     const cacheEntry = {
       timestamp: Date.now(),
-      data: response.data,
+      data: enhancedData,
     };
     await AsyncStorage.setItem(cacheKey, JSON.stringify(cacheEntry));
 
-    console.log('API Response:', response.data);
-    return response.data;
+    return enhancedData;
   } catch (error) {
     console.error('Error fetching Pokemon list:', error);
     throw error;
@@ -68,6 +86,8 @@ export const fetchPokemon = async (pokemonNameOrId) => {
     const response = await axios.get(
       `${BASE_API_URL}pokemon/${pokemonNameOrId}`
     );
+
+    await cleanupOldCache();
 
     //store data in asyncstorage
     const cacheEntry = {

@@ -8,11 +8,11 @@ const FavoritesStack = () => {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
       <Stack.Screen
-        name='FavoritesScreen'
+        name='Favorites'
         component={FavoritesScreen}
       />
       <Stack.Screen
-        name='PokemonDetails'
+        name='Pokemon'
         component={PokemonDetailsScreen}
       />
     </Stack.Navigator>

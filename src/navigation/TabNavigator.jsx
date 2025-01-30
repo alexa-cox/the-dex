@@ -14,11 +14,11 @@ const ScreenOptions = {
 const TabNavigator = () => {
   return (
     <Tab.Navigator
-      initialRouteName='Home'
+      initialRouteName='HomeStack'
       screenOptions={ScreenOptions}
     >
       <Tab.Screen
-        name='Search'
+        name='SearchStack'
         component={SearchStack}
         options={{
           tabBarIcon: ({ color, size }) => (
@@ -31,7 +31,7 @@ const TabNavigator = () => {
         }}
       />
       <Tab.Screen
-        name='Home'
+        name='HomeStack'
         component={HomeStack}
         options={{
           tabBarIcon: ({ color, size }) => (
@@ -44,7 +44,7 @@ const TabNavigator = () => {
         }}
       />
       <Tab.Screen
-        name='Favorites'
+        name='FavoritesStack'
         component={FavoritesStack}
         options={{
           tabBarIcon: ({ color, size }) => (

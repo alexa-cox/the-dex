@@ -1,35 +1,9 @@
-import React, { useEffect } from 'react';
-import {
-  Image,
-  Text,
-  TouchableOpacity,
-  View,
-  ActivityIndicator,
-} from 'react-native';
-import { useDispatch, useSelector } from 'react-redux';
-import { getPokemon } from '../redux';
-import TypeBadge from './TypeBadge';
+import React from 'react';
+import { Image, Text, TouchableOpacity, View } from 'react-native';
 import { pokemonCardStyles } from '../styles';
+import TypeBadge from './TypeBadge';
 
-const PokemonCard = ({ pokemonNameOrId }) => {
-  const dispatch = useDispatch();
-  const pokemon = useSelector(
-    (state) => state.pokemon.pokemonData[pokemonNameOrId]
-  );
-
-  useEffect(() => {
-    console.log('Fetching pokemon data for:', pokemonNameOrId);
-    dispatch(getPokemon(pokemonNameOrId));
-  }, [dispatch, pokemonNameOrId]);
-
-  if (!pokemon) {
-    return (
-      <View style={pokemonCardStyles.card}>
-        <ActivityIndicator size='large' />
-      </View>
-    );
-  }
-
+const PokemonCard = ({ pokemon }) => {
   return (
     <TouchableOpacity style={pokemonCardStyles.card}>
       <View>
