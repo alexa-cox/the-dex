@@ -9,6 +9,10 @@ import {
 export const fetchPokemonList = async (page = 0) => {
   try {
     const offset = page * POKEMON_PER_PAGE;
+    console.log(
+      'Fetching from API:',
+      `${BASE_API_URL}pokemon?limit=${POKEMON_PER_PAGE}&offset=${offset}`
+    );
     const cacheKey = `pokemon_list_${page}`;
 
     //check cache
@@ -33,6 +37,7 @@ export const fetchPokemonList = async (page = 0) => {
     };
     await AsyncStorage.setItem(cacheKey, JSON.stringify(cacheEntry));
 
+    console.log('API Response:', response.data);
     return response.data;
   } catch (error) {
     console.error('Error fetching Pokemon list:', error);

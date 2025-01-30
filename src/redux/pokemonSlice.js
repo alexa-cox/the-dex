@@ -43,8 +43,8 @@ const pokemonSlice = createSlice({
         state.errMess = null;
       })
       .addCase(getPokemon.fulfilled, (state, action) => {
-        (state.isLoading = false),
-          (state.pokemonData[action.meta.arg] = action.payload);
+        state.isLoading = false;
+        state.pokemonData[action.meta.arg] = action.payload;
       })
       .addCase(getPokemon.rejected, (state, action) => {
         state.isLoading = false;

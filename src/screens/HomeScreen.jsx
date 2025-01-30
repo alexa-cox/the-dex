@@ -12,20 +12,22 @@ const HomeScreen = () => {
   );
 
   useEffect(() => {
+    console.log('Current Pokemon List:', pokemonList);
     loadInitialPokemon();
   }, []);
 
   const loadInitialPokemon = () => {
     if (pokemonList.length === 0) {
+      console.log('Dispatching initial pokemon load');
       dispatch(getPokemonList(0));
     }
   };
 
-  const loadMorePokemon = () => {
-    if (!isLoading && hasMore) {
-      dispatch(getPokemonList(currentPage));
-    }
-  };
+  // const loadMorePokemon = () => {
+  //   if (!isLoading && hasMore) {
+  //     dispatch(getPokemonList(currentPage));
+  //   }
+  // };
 
   const renderLoadingFooter = () => {
     if (!isLoading) return null;
@@ -36,7 +38,10 @@ const HomeScreen = () => {
     );
   };
 
-  const renderPokemonCard = ({ item }) => <PokemonCard pokemon={item} />;
+  const renderPokemonCard = ({ item }) => {
+    console.log('Item in renderPokemonCard:', item);
+    return <PokemonCard pokemonNameOrId={item.name} />;
+  };
 
   return (
     <View style={homeStyles.container}>
@@ -44,7 +49,7 @@ const HomeScreen = () => {
         data={pokemonList}
         renderItem={renderPokemonCard}
         keyExtractor={(item) => item.name}
-        onEndReached={loadMorePokemon}
+        onEndReached={null}
         onEndReachedThreshold={0.5}
         ListFooterComponent={renderLoadingFooter}
         numColumns={2}
