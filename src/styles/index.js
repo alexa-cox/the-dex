@@ -1,3 +1,4 @@
+import { headerStyles } from './headerStyles';
 import { homeStyles } from './homeStyles';
 
-export { homeStyles };
+export { headerStyles, homeStyles };

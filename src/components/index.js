@@ -1,4 +1,5 @@
 //imports
+import CustomHeader from './CustomHeader';
 import Disclaimer from './Disclaimer';
 import Error from './Error';
 import Loading from './Loading';
@@ -9,6 +10,7 @@ import TypeBadge from './TypeBadge';
 
 //exports
 export {
+  CustomHeader,
   Disclaimer,
   Error,
   Loading,
